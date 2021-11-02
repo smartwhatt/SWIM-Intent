@@ -1,0 +1,48 @@
+{
+    "intents": [
+        {
+            "tag":"greeting",
+            "patterns": ["Hey", "Hello", "What's up?", "How is it going?", "Hi", "Good day", "Hallo", "Yaho", "Hola", "Ciao", "ayy"]
+        },
+        {
+            "tag":"translate",
+            "patterns": ["what is apple in latin", "what is pineapple in thai", "what the thai word for apple", "what's hello in french", "what's chinese for goodbye", "how do you say people in Spanish", "can you translate I'm hungry to japanese"]
+        },
+        {
+            "tag":"map",
+            "patterns": ["Where is the Grand palace", "shops near me", "nearest tourist attraction", "how do I go to bangkok", "bring me to the temple", "take me to the church", "navigate home"]
+        },
+        {
+            "tag":"price",
+            "patterns": ["how much is ethereum", "how's the bitcoin market", "price of apple stock", "value of litecoin", "how much for a google stock", "am I rich enough to buy a stock of apple", "google stock price", "ethereum price"]
+        },
+        {
+            "tag":"music",
+            "patterns": ["play dream's mask sus remix", "I want to listen to pop music", "can you play a sad song", "play me super idol", "play rock music"]
+        },
+        {
+            "tag":"timer",
+            "patterns": ["create a timer for 10 minutes", "start a timer for 1 hour", "count down for 10 seconds", "create a time for 40 minutes", "start timer for 6 hours", "count down for 15 minutes"]
+        },
+        {
+            "tag":"calculate",
+            "patterns": ["what is 10 times 15", "calculate 9 plus 6", "2 to the power of 5", "1 + 5", "product of 10 and 20", "sum of 2 and 4", "difference between 96 and 61", "what is 10 plus 30", "what is the remainder of 2 divided by 3"]
+        },
+        {
+            "tag":"todo",
+            "patterns":["add talk to people to the todo list", "add read news to the todo", "put tideman onto the todo list", "add to do for doing homework", "put a todo for doing project"]
+        },
+        {
+            "tag":"time",
+            "patterns": ["what time is it now", "tell the time", "could you tell me what time it is", "is it morning", "could you tell me the time", "when is it now", "what is the present time", "may you please pronounce me the time at present"]
+        },
+        {
+            "tag":"news",
+            "patterns": ["what's the news today", "what happened today", "what happened to the world today", "what has been going on lately", "how people of the world are doing", "tell me the latest news", "what's latest news", "what are the news", "what's the news for today"]
+        },
+        {
+            "tag":"rhetorical",
+            "patterns": ["why is my code not working", "why is it not returning anything", "what's wrong here", "how do I fix this", "what the fuck is this", "how do I suppose to fix this", "how does this work", "Am I stupid", "google time"]
+        }
+    ]
+}
