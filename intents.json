@@ -43,6 +43,10 @@
         {
             "tag":"rhetorical",
             "patterns": ["why is my code not working", "why is it not returning anything", "what's wrong here", "how do I fix this", "what the fuck is this", "how do I suppose to fix this", "how does this work", "Am I stupid", "google time"]
+        },
+        {
+            "tag":"query",
+            "patterns": ["who is John Harvard", "how to use github", "what is the benefit of banana", "how many people are there on the earth", "search for google.com", "who created facebook", "how does people go to sleep", "what is the name of the capital city of burma", "which president of ameria start using the whitehouse", "how to run python program", "why do birds migrate", "what are the chance of being born"]
         }
     ]
 }
