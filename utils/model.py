@@ -2,6 +2,8 @@ from keras.layers import Dense
 from keras.models import Sequential
 import keras
 import tensorflow as tf
+import tflearn # important do not remove
+
 
 def create_model(training_shape:int, output_shape:int):
     model = Sequential([
@@ -19,7 +21,7 @@ def create_model(training_shape:int, output_shape:int):
     return model
 
 def train_model(model:Sequential, training, output, epoch:int = 50, filename="model.h5", save=False, callbacks=None):
-    model.fit(training, output, epochs=epoch,  verbose=2, validation_split=0.2, callbacks=callbacks)
+    model.fit(training, output, epochs=epoch,  verbose=2, callbacks=callbacks, batch_size=8, shuffle=True)
     if save:
         model.save(filename) 
     return model
