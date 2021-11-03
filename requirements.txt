@@ -10,6 +10,7 @@ charset-normalizer==2.0.7
 clang==5.0
 click==8.0.3
 colorama==0.4.4
+fastapi==0.70.0
 flatbuffers==1.12
 gast==0.4.0
 google-auth==2.3.3
@@ -34,6 +35,7 @@ protobuf==3.19.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycodestyle==2.8.0
+pydantic==1.8.2
 python-dotenv==0.19.1
 PyYAML==6.0
 regex==2021.11.1
@@ -54,11 +56,9 @@ toml==0.10.2
 tqdm==4.62.3
 typing-extensions==3.7.4.3
 urllib3==1.26.7
+uvicorn==0.15.0
 watchgod==0.7
 websockets==10.0
 Werkzeug==2.0.2
 wrapt==1.12.1
 zipp==3.6.0
-fastapi>=0.68.0,<0.69.0
-pydantic>=1.8.0,<2.0.0
-uvicorn>=0.15.0,<0.16.0
