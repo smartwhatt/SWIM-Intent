@@ -18,8 +18,8 @@ def create_model(training_shape:int, output_shape:int):
     model.compile(loss=loss, optimizer=optim, metrics=metrics)
     return model
 
-def train_model(model:Sequential, training, output, epoch:int, filename="model.h5", save=False):
-    model.fit(training, output, epochs=epoch,  verbose=2, validation_split=0.2)
+def train_model(model:Sequential, training, output, epoch:int = 50, filename="model.h5", save=False, callbacks=None):
+    model.fit(training, output, epochs=epoch,  verbose=2, validation_split=0.2, callbacks=callbacks)
     if save:
         model.save(filename) 
     return model
