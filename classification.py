@@ -1,8 +1,7 @@
 import pickle
-from keras.layers import Dense, Activation
+from keras.layers import Dense
 from keras.models import Sequential
 import keras
-from tensorflow.python.framework import ops
 from datetime import datetime
 import json
 import random
@@ -13,101 +12,62 @@ import nltk
 from nltk.stem.lancaster import LancasterStemmer
 from numpy.__config__ import show
 
-stemmer = LancasterStemmer()
+from utils.preprocess import load_data, create_training_data, bag_of_words
 
+# stemmer = LancasterStemmer()
 
-with open("intents.json") as file:
-    data = json.load(file)
+# Load dataset
+words, labels, docs = load_data("intents.json")
+docs_x, docs_y = docs
 
-words = []
-labels = []
-docs_x = []
-docs_y = []
-for intent in data["intents"]:
-    for pattern in intent["patterns"]:
-        wrds = nltk.word_tokenize(pattern)
-        words.extend(wrds)
-        docs_x.append(wrds)
-        docs_y.append(intent["tag"])
-    if intent["tag"] not in labels:
-        labels.append(intent["tag"])
-words = [stemmer.stem(w.lower()) for w in words if w != "?"]
-words = sorted(list(set(words)))
-labels = sorted(labels)
-training = []
-output = []
-out_empty = [0 for _ in range(len(labels))]
-for x, doc in enumerate(docs_x):
-    bag = []
-    wrds = [stemmer.stem(w.lower()) for w in doc]
-    for w in words:
-        if w in wrds:
-            bag.append(1)
-        else:
-            bag.append(0)
-    output_row = out_empty[:]
-    output_row[labels.index(docs_y[x])] = 1
-    training.append(bag)
-    output.append(output_row)
-training = numpy.array(training)
-output = numpy.array(output)
+# create trainning data
+training, output = create_training_data(words, labels, docs_x, docs_y)
+
+# training = []
+# output = []
+# out_empty = [0 for _ in range(len(labels))]
+# for x, doc in enumerate(docs_x):
+#     bag = []
+#     wrds = [stemmer.stem(w.lower()) for w in doc]
+#     for w in words:
+#         if w in wrds:
+#             bag.append(1)
+#         else:
+#             bag.append(0)
+#     output_row = out_empty[:]
+#     output_row[labels.index(docs_y[x])] = 1
+#     training.append(bag)
+#     output.append(output_row)
+# training = numpy.array(training)
+# output = numpy.array(output)
 with open("data.pickle", "wb") as f:
     pickle.dump((words, labels, training, output), f)
 
 
 # model creation
-# model = Sequential([
-#     Dense(8, input_shape=(len(training[0]), ), activation="relu"),
-#     Dense(8, activation="relu"),
-#     Dense(len(output[0]), activation="softmax")
-# ])
+model = Sequential([
+    Dense(8, input_shape=(len(training[0]), ), activation="relu"),
+    Dense(8, activation="relu"),
+    Dense(len(output[0]), activation="softmax")
+])
 
-# loss = keras.losses.BinaryCrossentropy(from_logits=False)
-# optim = tf.optimizers.Adam(lr=0.0083)
-# metrics = ["accuracy"]
+loss = keras.losses.BinaryCrossentropy(from_logits=False)
+optim = tf.optimizers.Adam(lr=0.0083)
+metrics = ["accuracy"]
 
-# # print("\nCompiling Model...\n")
-# model.compile(loss=loss, optimizer=optim, metrics=metrics)
+# print("\nCompiling Model...\n")
+model.compile(loss=loss, optimizer=optim, metrics=metrics)
 
-# model.fit(training, output, epochs=1000,  verbose=2)
-# model.save(f"model/model.h5")
-
-ops.reset_default_graph()
-
-net = tflearn.input_data(shape=[None, len(training[0])])
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
-net = tflearn.regression(net)
-
-model = tflearn.DNN(net)
-
-
-model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
-# print(f"model/model.tflearn")
-model.save(f"model/model.tflearn")
-# print(labels)
-
-
-def bag_of_words(s, words):
-    bag = [0 for _ in range(len(words))]
-
-    s_words = nltk.word_tokenize(s)
-    s_words = [stemmer.stem(word.lower()) for word in s_words]
-
-    for se in s_words:
-        for i, w in enumerate(words):
-            if w == se:
-                bag[i] = 1
-
-    return numpy.array(bag)
+model.fit(training, output, epochs=1000,  verbose=2, validation_split=0.2)
+model.save(f"model/model.h5")
 
 
 while True:
     inp = input("You: ")
     if inp.lower() == "quit":
         break
-    results = model.predict([bag_of_words(inp, words)])
+    sentence = numpy.array([bag_of_words(inp, words)])
+    results = model.predict(sentence)
     results_index = numpy.argmax(results)
     maxindex = numpy.max(results)
     tag = labels[results_index]

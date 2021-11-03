@@ -2,7 +2,7 @@
     "intents": [
         {
             "tag":"greeting",
-            "patterns": ["Hey", "Hello", "What's up?", "How is it going?", "Hi", "Good day", "Hallo", "Yaho", "Hola", "Ciao", "ayy"]
+            "patterns": ["Hey", "Hello", "What's up?", "How is it going?", "Hi", "Good day", "Hallo", "Yaho", "Hola", "Ciao", "ayy", "how are you"]
         },
         {
             "tag":"translate",
@@ -46,7 +46,7 @@
         },
         {
             "tag":"query",
-            "patterns": ["who is John Harvard", "how to use github", "what is the benefit of banana", "how many people are there on the earth", "search for google.com", "who created facebook", "how does people go to sleep", "what is the name of the capital city of burma", "which president of ameria start using the whitehouse", "how to run python program", "why do birds migrate", "what are the chance of being born"]
+            "patterns": ["who is John Harvard", "how to use github", "what is the benefit of banana", "how many people are there on the earth", "search for google.com", "who created facebook", "how does people go to sleep", "what is the name of the capital city of burma", "which president of ameria start using the whitehouse", "how to run python program", "why do birds migrate", "what are the chance of being born", "google how to bake a cake"]
         }
     ]
 }
