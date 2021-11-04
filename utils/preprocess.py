@@ -3,6 +3,7 @@ import nltk
 from nltk.stem.lancaster import LancasterStemmer
 import numpy as np
 
+nltk.download('punkt')
 stemmer = LancasterStemmer()
 
 def load_data(filename:str):
