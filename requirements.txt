@@ -59,6 +59,6 @@ urllib3==1.26.7
 uvicorn==0.15.0
 watchgod==0.7
 websockets==10.0
-Werkzeug==2.0.2
+Werkzeug==2.2.3
 wrapt==1.12.1
 zipp==3.6.0
